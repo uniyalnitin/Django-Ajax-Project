@@ -1,0 +1,41 @@
+
+		 .search_section  {
+            float: left;
+         }
+         .content_section  {
+            float: left;
+         }
+         table  {
+            border:1px solid #000;
+            border-spacing: 0px;
+            background-color: #EEE;
+            border-collapse:collapse;
+         }
+         thead  {
+            font-weight: bold;
+            text-decoration: underline;
+         }
+         th  {
+            border:1px solid #000;
+            padding: 4px;
+         }
+         td  {
+            text-align: center;
+            vertical-align: middle;
+            padding: 4px;
+            border:1px solid #000;
+         }
+         .td__color_color  {
+            text-align: right;
+         }
+         .td__color_name  {
+            text-align: left;
+         }
+         .liked  {
+            text-align: center;
+            background-color: #CD0;
+         }
+         .unliked  {
+            text-align: center;
+            background-color: white;
+         }

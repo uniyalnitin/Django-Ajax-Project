@@ -1,0 +1,96 @@
+{% comment %}
+ humanize: For the "apnumber" filter, to display "two" instead of
+   "2". Requries 'django.contrib.humanize' in INSTALLED_APPS
+{% endcomment %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<title>Color Likenatorizer</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=device-width"/>
+	<meta name="viewport" content="width=device-width"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+      
+</head>
+<body>
+	<div class="search_section">
+		<form id="search_colors_form_id" method="get" action ="{% url 'color_list' %}">
+			<input type="text" name="search_text" id="search_text"/>
+			<input type="submit" value="Search for color" id="id_pic_submit_button"/>
+			<p>(Requires {{ MIN_SEARCH_CHARS}}</p>
+		</form>
+		{% if search_text|length >= MIN_SEARCH_CHARS %}
+		<p><b>Searching for &quot;<code>{{ search_text }}</code>&quot;:</b>
+			{% if color_search_results.count > 0 %}
+				</p>
+				<ul>
+					{% for color in color_search_results %}
+						<li>{{ color.name }}</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<i>No results</i>
+			{% endif %}
+		{% endif %}
+		
+	</div>
+	
+	<div class="content_section">
+		<h1>Color Likenatoizer</h1>
+
+		{% if colors.count == 0 %}
+			<p><i>There are no colors in the database</i></p>
+		{% else %}
+			<table>
+				<tr>
+					<th colspan="2">Color</th>
+					<th>Favrioute?</th>
+				</tr>
+				{% for color in colors %}
+					<tr>
+						<td style="background-color: {{ color.name }};" class="td__color_color">{{ color.name }}</td>
+						<td class="td__color_name">{{ color.name }}</td>
+						<td id="toggle__color_like_cell_{{color.id }}" class="td__toggle_color_like_button" data-color_id="{{ color.id }}">
+							{% include "color_liker/color_like_link_html_snippet.txt" %}
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% endif %}
+	</div>
+	 
+	<!--  <script src="<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+	<!-- <script language="javascript">
+		var LIKE_URL_PRE_ID = {% url 'toggle_color_like' color_id='999999' %}
+		
+	</script> -->
+	<script>
+ 	var MILLS_TOIGNORE_LIKES = 500;
+
+var processLike = function(){
+	var $button_just_clicked_on = $(this);
+
+	var color_id = $button_just_clicked_on.data('color_id');
+	
+ 	var processServerResponse = function(serverResponse_data, textStatus_ignored,jqXHR_ignored)  {
+
+ 		$('#toggle__color_like_cell_' + color_id).html(serverResponse_data);
+ 	}
+
+ 	var config = {
+	 	url :'/color_liker/like_color_/'+color_id,
+ 		dataType : 'html',
+ 		success: processServerResponse
+	};
+	$.ajax(config);
+};
+
+$(document).ready(function(){
+	$('.td__toggle_color_like_button').click(processLike);
+
+});
+ </script>
+</body>
+</html>

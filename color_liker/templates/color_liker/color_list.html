@@ -8,20 +8,33 @@
 	<title>Color Likenatorizer</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=device-width"/>
 	<meta name="viewport" content="width=device-width"/>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
 
-	<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
+	</script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+
+	{% load static %}
+	 <script src="{% static 'css/styles.css' %}" defer></script>
+
+	 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+	
       
 </head>
 <body>
 	<div class="search_section">
-		<form id="search_colors_form_id" method="get" action ="{% url 'color_list' %}">
-			<input type="text" name="search_text" id="search_text"/>
-			<input type="submit" value="Search for color" id="id_pic_submit_button"/>
-			<p>(Requires {{ MIN_SEARCH_CHARS}}</p>
-		</form>
-		{% if search_text|length >= MIN_SEARCH_CHARS %}
+		<!-- <form id="search_colors_form_id" method="get" action ="{% url 'color_list' %}"> -->
+
+		
+
+			<div class="ui-widget">
+			  <label for="color_search_text">Colors: </label>
+			  <input id="color_search_text">
+			</div>
+			<!-- <input type="submit" value="Search for color" id="id_pic_submit_button"/>
+ -->			
+ 
+	<!-- 	</form> -->
+		<!-- {% if search_text|length >= MIN_SEARCH_CHARS %}
 		<p><b>Searching for &quot;<code>{{ search_text }}</code>&quot;:</b>
 			{% if color_search_results.count > 0 %}
 				</p>
@@ -34,7 +47,8 @@
 				<i>No results</i>
 			{% endif %}
 		{% endif %}
-		
+		 -->
+	
 	</div>
 	
 	<div class="content_section">
@@ -61,12 +75,16 @@
 		{% endif %}
 	</div>
 	 
-	<!--  <script src="<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-	<!-- <script language="javascript">
-		var LIKE_URL_PRE_ID = {% url 'toggle_color_like' color_id='999999' %}
-		
-	</script> -->
-	{% load static %}
- <script src="{% static 'js/color_ajax_like.js' %}" defer></script>
+<!-- 	{% load static %}
+ <script src="{% static 'js/color_ajax_like.js' %}" defer></script> -->
+
+<!-- {% load static %}
+<script type='text/javascript' src="{% static 'js/color_ajax_search.js' %}" defer></script>
+{% load static %}
+   <script type='text/javascript' src="{% static 'js/color_ajax_like.js' %}" defer></script> -->
+
+   {% load static %}
+   <script type='text/javascript' src="{% static 'js/color_ajax_main.js' %}" defer></script>
+
 </body>
 </html>

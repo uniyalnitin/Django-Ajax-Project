@@ -1,0 +1,13 @@
+{% if search_text|length >= MIN_SEARCH_CHARS %}
+	<p><b> Searching for &quot; <code>{{ search_text }}</code> :</b></p>
+
+	{% if color_search_results.count > 0 %}
+		
+			{% for color in color_search_results %}
+				<li> {{ color.name }} </li>
+			{% endfor %}
+		
+	{% else %}
+		<i> No Results </i></p>
+	{% endif %}
+{% endif %}

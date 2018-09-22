@@ -17,8 +17,3 @@ var processLike = function(){
 	};
 	$.ajax(config);
 };
-
-$(document).ready(function(){
-	$('.td__toggle_color_like_button').click(processLike);
-
-});
